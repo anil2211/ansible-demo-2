@@ -1,0 +1,38 @@
+---
+# tasks file for httpd
+- name: Install apache
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: yes
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: files/index.html
+    dest: /var/www/html
+    owner: root
+    group: root
+    mode: '0644'
+
+# - name: Update apt cache
+#   apt:
+#     update_cache: yes  # Ensures that apt-get cache is up-to-date
+
+# - name: Install Apache2
+#   apt:
+#     name: apache2  # Package to install Apache2
+#     state: present  # Ensure Apache2 is installed
+
+# - name: Start Apache2 service
+#   service:
+#     name: apache2  # Apache2 service name
+#     state: started  # Ensure Apache2 is running
+#     enabled: yes  # Ensure Apache2 starts on boot
+
+# - name: Check Apache2 status
+#   command: systemctl status apache2
+#   register: apache_status
+#   failed_when: false
+
+# - name: Show Apache2 status
+#   debug:
+#     var: apache_status.stdout
