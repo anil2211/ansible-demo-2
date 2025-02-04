@@ -1,3 +1,6 @@
 ubuntu.pem
+ubuntu.pem.pub
 *pem
 inventory.ini
+secrets.yml
+*secrets
