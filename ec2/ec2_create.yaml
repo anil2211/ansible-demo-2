@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  vars_files:
+    - /home/anil/ansible-youtube/ec2/secrets.yml
+  roles:
+   - ec2_role

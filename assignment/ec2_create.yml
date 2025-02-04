@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+    - /home/anil/ansible-youtube/assignment/secrets.yml
+
+  tasks:
+   - name: start an instance with a public IP address
+     amazon.aws.ec2_instance:
+       name: "{{ item.name }}"
+       instance_type: t2.micro
+       security_group: default
+       key_name: "ubuntu"
+       region: ap-south-1
+       aws_access_key: "{{ ec2_aws_access_key }}"  # From vault as defined
+       aws_secret_key: "{{ ec2_aws_secret_key }}"  # From vault as defined      
+       network:
+        assign_public_ip: true
+       image_id: "{{ item.image }}"
+     loop:
+       - { image: "ami-05fa46471b02db0ce" , name: "managed-node-1" } 
+       - { image: "ami-00bb6a80f01f03502" , name: "managed-node-2" }
+       - { image: "ami-00bb6a80f01f03502" , name: "managed-node-3" }
+     register: ec2_instance
+

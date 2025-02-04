@@ -1,0 +1,3 @@
+---
+# defaults file for ec2_role
+type: t2.micro
