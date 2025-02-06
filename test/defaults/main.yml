@@ -1,2 +1,7 @@
 ---
 # defaults file for test
+docker_obsolete_packages:
+  - docker
+  - docker-engine
+  - docker.io
+  - containerd.io

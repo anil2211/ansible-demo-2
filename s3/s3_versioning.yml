@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: List all S3 buckets
+      amazon.aws.s3_bucket_info:
+        aws_access_key: "{{ ec2_aws_access_key }}"
+        aws_secret_key: "{{ ec2_aws_secret_key }}"
+        region: "ap-south-1"  # Set to the region where your S3 buckets exist
+      register: result
+
+    - name: Show all S3 buckets
+      debug:
+        var: result
+
+    - name: Enable versioning on S3 bucket
+      amazon.aws.s3_bucket_versioning:
+        aws_access_key: "{{ ec2_aws_access_key }}"
+        aws_secret_key: "{{ ec2_aws_secret_key }}"
+        name: "{{ item.name }}"
+        versioning: yes
+        region: "ap-south-1"
+      loop: "{{ result.buckets }}"

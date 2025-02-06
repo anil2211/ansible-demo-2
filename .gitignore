@@ -4,3 +4,4 @@ ubuntu.pem.pub
 inventory.ini
 secrets.yml
 *secrets
+*.pub
